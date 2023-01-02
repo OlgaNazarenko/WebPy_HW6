@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "webpy-hw6"
+version = "0.1.0"
+description = "Creating a database with SQL initialize via Python"
+authors = ["olganazarenko <113229061+olganazarenko@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "webpy_hw6"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+faker = "^15.3.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

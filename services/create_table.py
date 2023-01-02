@@ -1,5 +1,6 @@
 import sqlite3
 from sqlite3 import Error
+from services.settings import DATABASE
 
 
 class DataConn:
@@ -15,16 +16,20 @@ class DataConn:
         if exc_val:
             raise
 
-
-def create_table(conn, create_table_sql):
-    try:
-        c = conn.cursor()
-        c.executescript(create_table_sql)
-    except Error as e:
-        print(f"The error '{e}' occurred")
+# conn, create_table_sql = belongs to args of create_table
 
 
-if __name__ == '__main__':
+def create_table() -> tuple():
+    # try:
+    #     c = conn.cursor()
+    #     c.executescript(create_table_sql)
+    #     c.close()
+    #     print('DB is created \n')
+    # except Error as e:
+    #     print(f"The error '{e}' occurred")
+    #
+
+# if __name__ == '__main__':
 
     sgl_create_student_table = """
     DROP TABLE IF EXISTS students;
@@ -65,7 +70,7 @@ if __name__ == '__main__':
         professors_id INTEGER,
         FOREIGN KEY (groups_id) REFERENCES groups (id)
           ON DELETE CASCADE
-          ON UPDATE CASCADE
+          ON UPDATE CASCADE,
         FOREIGN KEY (groups_id) REFERENCES professors (id)
           ON DELETE CASCADE
           ON UPDATE CASCADE
@@ -96,13 +101,16 @@ if __name__ == '__main__':
     Tables: list = [sql_create_group_table, sgl_create_student_table, sql_create_professor_table,
                     sgl_create_disciplines_table, sql_create_marks_table]
 
-    db = 'various.db'
-
-    with DataConn(db) as conn:
+    with DataConn(DATABASE) as conn:
         cursor = conn.cursor()
-        print("Connection to SQLite DB successful")
+        print("Connection to SQLite DB was successful")
+        # if conn is not None:
+        #     for table in Tables:
+        #         create_table(conn, table)
+        # else:
+        #     print("Error! \n cannot create the database connection.")
         if conn is not None:
             for table in Tables:
-                create_table(conn , table)
-        else:
-            print("Error! \n cannot create the database connection.")
+                cursor.executescript(table)
+        cursor.close()
+        print('DB is created\n')
