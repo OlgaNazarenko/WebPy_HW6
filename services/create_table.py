@@ -16,20 +16,9 @@ class DataConn:
         if exc_val:
             raise
 
-# conn, create_table_sql = belongs to args of create_table
-
 
 def create_table() -> tuple():
-    # try:
-    #     c = conn.cursor()
-    #     c.executescript(create_table_sql)
-    #     c.close()
-    #     print('DB is created \n')
-    # except Error as e:
-    #     print(f"The error '{e}' occurred")
-    #
 
-# if __name__ == '__main__':
 
     sgl_create_student_table = """
     DROP TABLE IF EXISTS students;
@@ -104,11 +93,7 @@ def create_table() -> tuple():
     with DataConn(DATABASE) as conn:
         cursor = conn.cursor()
         print("Connection to SQLite DB was successful")
-        # if conn is not None:
-        #     for table in Tables:
-        #         create_table(conn, table)
-        # else:
-        #     print("Error! \n cannot create the database connection.")
+       
         if conn is not None:
             for table in Tables:
                 cursor.executescript(table)
