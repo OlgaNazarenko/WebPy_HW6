@@ -6,7 +6,7 @@ from services.select_tables import select_tables
 
 
 def assistance() -> str:
-    list_of_cmd = """Command format:
+    list_of_cmd: str = """Command format:
     help - this help
     1 - tp create tables
     2 - to complete or fill tables
@@ -45,14 +45,11 @@ def query_request():
     nmb = input('Please enter the query number:')
     for key, value in COMMANDS.items():
         if num.lower() == value:
-            # print(f'{num.lower() == value =}')
             print(f'{select_tables(num)=}')
-            # if num == value:
-            #     print(f'{elect_tables(num)=}')
         return value
 
 
-COMMANDS = {create_table: '1', fill_table: '2', select_tables: '3', assistance: 'help'}
+COMMANDS: dict = {create_table: '1', fill_table: '2', select_tables: '3', assistance: 'help'}
 
 
 def command_parser(user_command: str):
