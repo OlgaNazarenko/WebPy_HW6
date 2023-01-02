@@ -44,8 +44,8 @@ def query_request():
                       }
     nmb = input('Please enter the query number:')
     for key, value in COMMANDS.items():
-        if num.lower() == value:
-            print(f'{select_tables(num)=}')
+        if nmb.lower() == value:
+            print(f'{select_tables(nmb)=}')
         return value
 
 
